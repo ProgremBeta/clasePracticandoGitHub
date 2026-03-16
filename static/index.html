@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LLM Demo</title>
+    <style>
+      body { font-family: system-ui, Arial, sans-serif; margin: 2rem; }
+      input { padding: 0.5rem; font-size: 1rem; }
+      button { padding: 0.5rem 1rem; margin-left: 0.5rem; }
+      pre { background:#f6f8fa; padding:1rem; border-radius:6px; white-space:pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <h1>LLM Chat</h1>
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.5rem">
+      <div style="flex:1"></div>
+      <button id="clear" title="Limpiar historial">Limpiar historial</button>
+    </div>
+
+    <div id="chat" class="chat"></div>
+
+    <form id="composer" class="composer" onsubmit="return false;">
+      <input id="prompt" type="text" placeholder="Escribe un mensaje..." autocomplete="off" />
+      <button id="send">Enviar</button>
+    </form>
+
+    <!-- Markdown renderer + sanitizer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
