@@ -8,7 +8,9 @@ from typing import Annotated
 from fastapi import Depends, HTTPException, Query
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 
+import os
 
+load_dotenv()
 
 class User(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -16,11 +18,11 @@ class User(SQLModel, table=True):
     age: int | None = Field(default=None, index=True)
     username: str
 
-sqlite_file_name = "db.sqlite"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
+# sqlite_file_name = "db.sqlite"
+sqlite_url = os.getenv("DATABASE_URL")
 
 connect_args = {"check_same_thread": False}
-engine = create_engine(sqlite_url, connect_args=connect_args)
+engine = create_engine(sqlite_url)
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
@@ -84,7 +86,6 @@ app.add_middleware(
 # Serve static files from ./static at /static
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-load_dotenv()
 
 
 @app.get("/")
